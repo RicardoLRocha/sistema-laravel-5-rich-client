@@ -12,38 +12,40 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 
 // Ruta para genera un usuario
 /*
 Route::get('/user_richi_orm', function () {
-    $user = new \App\Models\User;
-    $user -> name = "richi";
-    $user -> email = "richi@gmail.com";
-    $user -> password = Hash::make("richi");
-    $user -> save();
+	$user = new \App\Models\User;
+	$user -> name = "richi";
+	$user -> email = "richi@gmail.com";
+	$user -> password = Hash::make("richi");
+	$user -> save();
 
 });
 */
 
-/*
+
 //seteamos el idioma seleccionado por el usuario
-Route::get("language/{locale}", function($locale)
-{
-    Session::set('locale', $locale);
-    return redirect()->back();
+/*
+Route::get("language/{locale}", function($locale){
+
+	Session::set('locale', $locale);
+	return redirect()->back();
 });
+*/
 
 //mapeamos el controlador UserController
 Route::controller('users', 'UserController');
 
-Route::group(array('middleware' => ['auth']), function($group)
-{
-    Route::controller('dashboard', 'DashboardController');
-    Route::controller('posts', 'PostsController');
-    Route::controller('cursos', 'CoursesController');
+Route::group(array('middleware' => ['auth']), function($group){
+
+	Route::controller('dashboard', 'DashboardController');
+	Route::controller('posts', 'PostController');
+	Route::controller('cursos', 'CoursesController');
 });
 
-*/
+
