@@ -1,38 +1,43 @@
 @extends("master")
 
+
 @section('title')
 
 	@lang('messages.login')
 
 @endsection
 
+
 @section('content')
 
-    <div class="col-md-6 col-md-offset-3">
+	<div class="col-md-6 col-md-offset-3">
 
-        <h1 class="text-muted text-center">@lang('messages.login')</h1>
+		<h1 class="text-muted text-center">@lang('messages.login')</h1>
 
-        {{-- Incluimos el template que muestra errores --}}
+		{{-- Incluimos el template que muestra errores, como de pass erroneo --}}
 		@include('includes/errors')
 
-        <div class="form-group">
+		<div class="form-group">
+			
+			<!-- ================================================
+			Por si solo Form genera implicito el TOKEN para CSRF
 
-            {!! Form::open(['url' => 'users/login', 'class' => 'form']) !!}
+			Agrega etiquera Label y Text
+			==================================================== -->
+			{!! Form::open(['url' => 'users/login', 'class' => 'form']) !!}
+		
+				{!! Form::label('email', Lang::get('messages.email')) !!}
+				{!! Form::text('email', old('email'), ["class" => "form-control"]) !!} <br>
 
-                {!! Form::label('email', Lang::get('messages.email')) !!}
+				{!! Form::label('password', Lang::get('messages.password')) !!}
+				{!! Form::password('password', ["class" => "form-control"]) !!}
 
-                {!! Form::text('email', old('email'), ["class" => "form-control"]) !!}<br>
+				<br />
+				{!! Form::submit(Lang::get('messages.login'), ["class" => "btn btn-success btn-block"]) !!}
 
-                {!! Form::label('password', Lang::get('messages.password')) !!}
+			{!! Form::close() !!}
 
-    	        {!! Form::password('password', ["class" => "form-control"]) !!}
-
-                <br />
-    	        {!! Form::submit(Lang::get('messages.login'), ["class" => "btn btn-success btn-block"]) !!}
-
-            {!! Form::close() !!}
-
-        </div>
-    </div>
+		</div>
+	</div>
 
 @endsection

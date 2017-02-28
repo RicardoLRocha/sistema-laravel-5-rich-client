@@ -44,7 +44,7 @@ Route::controller('users', 'UserController');
 Route::group(array('middleware' => ['auth']), function($group){
 
 	Route::controller('dashboard', 'DashboardController');
-	Route::controller('posts', 'PostController');
+	Route::controller('posts', 'PostsController');
 	Route::controller('cursos', 'CoursesController');
 });
 

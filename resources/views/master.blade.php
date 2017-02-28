@@ -6,6 +6,7 @@
 	{!! Html::style('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css') !!}
 	{!! Html::script('https://code.jquery.com/jquery-1.11.1.js') !!}
 	{!! Html::script('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js') !!}
+	
 	@if (Auth::check())
 			{!! Html::style('css/styles.css') !!}
 	@endif
@@ -30,6 +31,8 @@
 
 		<!-- ======================
 			Si esta logeado
+
+			usa 
  		====================== -->		
 		@if (Auth::check())
 			<div class="col-md-3">
