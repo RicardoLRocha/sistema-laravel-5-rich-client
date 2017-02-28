@@ -11,8 +11,7 @@ class RegisterForm extends Request
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -21,13 +20,12 @@ class RegisterForm extends Request
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
-            "name"      =>    "required|min:2|max:255",
-			"email"     =>    "required|unique:users|max:255|email",
-            "password"  =>    "required|min:6|confirmed",
-            "password_confirmation" => "required|min:6"
+            "name"      =>    "required|min:2|max:100",
+			"email"     =>    "required|unique:users|max:100|email",
+            "password"  =>    "required|min:5|confirmed",
+            "password_confirmation" => "required|min:5"
 		];
     }
 }

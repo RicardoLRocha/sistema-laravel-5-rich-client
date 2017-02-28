@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "welcome"               =>  "Welcome al Curso de Laravel 5 :user", //parámetros trans
+    "welcome"               =>  "Bienvenido al Curso de Laravel 5 :user", //parámetros trans
     "login"                 =>  "Iniciar sesión",
     "password"              =>  "Contraseña",
     "email"                 =>  "Email",
@@ -56,5 +56,6 @@ return [
     "language"              =>  "Idioma",
     "spanish"               =>  "Español",
     "english"               =>  "Inglés",
-    "logout"                =>  "Cerrar sesión"
+    "logout"                =>  "Cerrar sesión",
+    "number_users"          =>  "Número de usuarios"
 ];

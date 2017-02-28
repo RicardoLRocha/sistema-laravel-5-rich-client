@@ -22,17 +22,23 @@ class User extends Authenticatable{
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
 
 
+    //relación uno a muchos entre users y posts
     public function posts(){
-        return $this->hasMany->('App\Models\Post');
+        return $this->hasMany('App\Models\Post');
     }
 
+    //relación muchos a muchos entre usuarios y cursos
     public function cursos(){
-        return $this->belongsToMany->('App\Models\Curso');
+        return $this->belongsToMany("App\Models\Curso");
     }
 
+    //relación uno a muchos entre usuarios y comments
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
+    }
 
 }

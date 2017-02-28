@@ -38,6 +38,12 @@ Route::get("language/{locale}", function($locale){
 });
 */
 
+/* ===========================================
+	Ejemplo de rutas
+
+http://localhost:8080/users/login
+=========================================== */
+
 //mapeamos el controlador UserController
 Route::controller('users', 'UserController');
 

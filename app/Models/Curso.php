@@ -17,13 +17,9 @@ class Curso extends Model{
 	];
 
 
-	
-	public function user(){
-		return $this->belongsToMany->('App\Models\User');
-	}
-
-	public function post(){
-		return $this->hasMany->('App\Models\Post');
+	//un curso puede pertenecer a muchos usuarios, muchos a muchos con users
+	public function users(){
+		return $this->belongsToMany("App\Models\User");
 	}
     
 }

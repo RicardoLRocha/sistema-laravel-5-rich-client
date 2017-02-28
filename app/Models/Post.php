@@ -16,14 +16,12 @@ class Post extends Model{
 		'user_id', 'title', 'foto', 'content'
 	];
 
-
-	
 	public function user(){
-		return $this->belongsTo->('App\Models\User');
+		return $this->belongsTo('App\Models\User');
 	}
 
 	public function comments(){
-		return $this->hasMany->('App\Models\Comment');
+		return $this->hasMany('App\Models\Comment');
 	}
 
 

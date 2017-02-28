@@ -49,16 +49,16 @@ class UserController extends Controller{
 		return view("users.login");
 	}
 
-	public function postLogin(LoginForm $loginForm, Request $request){
-
+	public function postLogin(Request $request, LoginForm $loginForm){
 		// Con ID Request
 		$email = $request-> input('email');
 		$password = $request-> input('password');
 
-		//$email = \Request::input('email');
-		//$password = \Request::input('password');
+		// $email = \Request::input('email');
+		// $password = \Request::input('password');
 
 		if (Auth::attempt(['email' => $email, 'password' => $password])){
+
 			return redirect()->intended('dashboard');
 		}else{
 
@@ -81,11 +81,20 @@ class UserController extends Controller{
 		return view("users.register");
 	}
 
-	public function postRegister(RegisterForm $registerForm){
+	/** RUTA http://localhost:8080/users/register
+	*
+	* Reglas puestas en Requests/RegisterForm.php
+	*	
+	**/
+	public function postRegister(Request $request, RegisterForm $registerForm){
 
-		$email = \Request::input('email');
-		$password = \Hash::make(\Request::input('password'));
-		$name = \Request::input('name');
+		// $email = \Request::input('email');
+		// $password = \Hash::make(\Request::input('password'));
+		// $name = \Request::input('name');
+		
+		$email = $request-> input('email');
+		$password = \Hash::make(  $request-> input('password') );
+		$name = $request-> input('name');
 
 		$user = new User(array(
 			'name' => $name,
@@ -95,7 +104,10 @@ class UserController extends Controller{
 
 		$user->save();
 
-		if (Auth::attempt(['email' => $email, 'password' => \Request::input('password')])){
+		/** =====================================================================	
+		Revizo si existe ese usuario, creo su session y redirigo a vista dashboard
+		===================================================================== */		
+		if (Auth::attempt(['email' => $email, 'password' => $request-> input('password') ])){
 
 			\Session::flash('success_register', \Lang::get("messages.success_register"));
 			return redirect()->intended('dashboard');

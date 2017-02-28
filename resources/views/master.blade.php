@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
 	<title> Laravel 5.1 - @yield('title') </title>
 
 	{!! Html::style('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css') !!}
@@ -8,7 +9,7 @@
 	{!! Html::script('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js') !!}
 	
 	@if (Auth::check())
-			{!! Html::style('css/styles.css') !!}
+		{!! Html::style('css/styles.css') !!}
 	@endif
 
 	<!-- Fonts -->
@@ -33,7 +34,7 @@
 			Si esta logeado
 
 			usa 
- 		====================== -->		
+		====================== -->		
 		@if (Auth::check())
 			<div class="col-md-3">
 				@yield('sidebar')

@@ -1,3 +1,4 @@
+
 @extends("master")
 
 @section('title')
@@ -12,10 +13,20 @@
 
 @endsection
 
-@section('content')
 
+@section('content')
+	
+	<!-- ===================================================== 
+		En controller creamos en function postRegister
+		\Session::flash('success_register', \Lang::get("messages.success_register"));
+ 	===================================================== -->
     @if (Session::has('success_register'))
-        <div class="alert alert-success">{!! Session::get('success_register') !!}</div>
+    	
+    	<p> Valor de Session::get('success_register')  </p>
+
+        <div class="alert alert-success">
+        	{!! Session::get('success_register') !!}
+        </div>
     @endif
 
 @endsection
