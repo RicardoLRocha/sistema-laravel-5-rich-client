@@ -11,14 +11,18 @@ use DB;
 class AppServiceProvider extends ServiceProvider{
 
 	/**
-	 * Como VARIABLES GLOBALES
-		view()->share('key', 'value');
-	 *
-		y Validaciones
-
-	 * @return void
-	 */
+	* Revizar: Custom Validation Rules
+	*	Extends de los Requests en function rules(){ ... }
+	*
+	*	Comprobar los post para que no sean iguales
+	*
+	* @return True si falla y existe uno igual, False si es unico
+	*/
 	public function boot(){
+
+		/** Como VARIABLES GLOBALES
+		view()->share('key', 'value');
+	 	*/
 
 		Validator::extend('field_in_use', function($attribute, $value, $parameters){
 

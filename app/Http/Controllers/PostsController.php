@@ -17,7 +17,6 @@ class PostsController extends Controller{
 	public function getAll(){
 
 		// Hacemos variable posts con los Post con user, de 2 en 2
-
 		return view("posts.list")->with('posts', Post::with("user")->paginate(2)->setPath('all'));
 	}
 
@@ -29,6 +28,10 @@ class PostsController extends Controller{
 		return view("posts.create");
 	}
 
+
+	/*
+	* Crea post y una SESSION para mostrar mensaje de registrado en Vista posts/create.blade.php
+	*/
 	public function postCreate(PostForm $postForm){
 
 		$post = new Post;
@@ -37,12 +40,14 @@ class PostsController extends Controller{
 		$post->foto = \Request::input('foto');
 		$post->user_id = Auth::user()->id;
 		$post->save();
+
 		\Session::flash('post_created', \Lang::get("messages.post_created"));
 		return redirect()->back();
 	}
 
 	/*
-	* display form posts for edit
+	* display form posts for edit, 
+	* If it does not exist, return to the previous view.
 	*/
 	public function getEdit($id){
 
@@ -60,12 +65,15 @@ class PostsController extends Controller{
 		@if ( Session: :has('post_updated'))
 			< div ... alert>{ !! Session::get('post_updated') !! }
 	*
+	*
+	* Inyectamos Requests/PostForm.php (RULES), y las usa implicitamente
 	*/
-	public function postEdit(PostForm $postForm, $id){
+	public function postEdit(PostForm $postForm, $id){ // importa ORDEN en Controllers
 
 		$post = Post::find($id);
 		$post->title = \Request::input('title');
 		$post->content = \Request::input('content');
+		$post->foto = \Request::input('foto');
 		$post->user_id = \Request::input('user_id');
 		$post->save();
 
@@ -75,6 +83,12 @@ class PostsController extends Controller{
 	}
 
 
+
+	/**
+	* 
+	*
+	* @return Vista posts/detail.php tendra 2 arrays post y comments
+	*/	
 	public function getDetail($id){
 
 		$post = Post::find($id);

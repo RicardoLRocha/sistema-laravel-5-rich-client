@@ -31,11 +31,11 @@
 				{!! Form::label('title', Lang::get('messages.title')) !!}
 				{!! Form::text('title', old('title'), ["class" => "form-control"]) !!}<br>
 
+				{!! Form::label('foto', Lang::get('messages.photo')) !!}
+				{!! Form::text('foto', old('foto'), ["class" => "form-control"]) !!}                
+
 				{!! Form::label('content', Lang::get('messages.content')) !!}
 				{!! Form::textarea('content', old('content'), ["class" => "form-control"]) !!}
-
-				{!! Form::label('foto', Lang::get('messages.photo')) !!}
-				{!! Form::textarea('foto', old('foto'), ["class" => "form-control"]) !!}                
 
 				<br />
 				{!! Form::submit(Lang::get('messages.add_post'), ["class" => "btn btn-success btn-block"]) !!}
