@@ -2,6 +2,7 @@
 
 return [
     "welcome"               =>  "Welcome to Laravel 5 :user", //parámetros trans
+   
     "login"                 =>  "Iniciar sesión",
     "password"              =>  "Contraseña",
     "email"                 =>  "Email",
@@ -30,10 +31,14 @@ return [
     "success_profile"       =>  "Perfil actualizado correctamente",
     "user_updated"          =>  "Usuario actualizado",
     "update_user"           =>  "Actualizar usuario",
+    
+    
+    "photo"                 =>  "Añadir foto",
     "add_post"              =>  "Añadir post",
     "title"                 =>  "Título",
     "content"               =>  "Contenido",
     "author"                =>  "Autor",
+    
     "post_created"          =>  "El post se ha creado correctamente",
     "edit_post"             =>  "Editar post",
     "post_updated"          =>  "El post ha sido actualizo correctamente",
@@ -42,9 +47,11 @@ return [
     "withoutcourses"        =>  "No hay cursos",
     "withoutusers"          =>  "No hay usuarios",
     "edit_course"           =>  "Editar curso",
+    
     "course_created"        =>  "El curso ha sido creado correctamente",
     "course_updated"        =>  "El curso ha sido actualizo correctamente",
     "course_deleted"        =>  "El curso ha sido eliminado correctamente",
+    
     "subject"               =>  "Motivo",
     "comment"               =>  "Comentario",
     "add_comment"           =>  "Añadir comentario",
@@ -53,6 +60,7 @@ return [
     "add_user"              =>  "Añadir usuario",
     "subscribe"             =>  "Apuntarme",
     "subscribed"            =>  "Apuntado",
+
     "language"              =>  "Idioma",
     "spanish"               =>  "Español",
     "english"               =>  "Inglés",

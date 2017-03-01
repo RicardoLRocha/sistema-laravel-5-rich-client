@@ -21,13 +21,14 @@ class Comment extends Model
 	];
 
 
-	
+    //un comentario pertenece a un usuario
 	public function user(){
-		return $this->belongsTo->('App\Models\User');
+		return $this->belongsTo('App\Models\User');
 	}
 
+    //un comentario pertenece a un post --> belongsTo
 	public function post(){
-		return $this->hasMany->('App\Models\Post');
+		return $this->hasMany('App\Models\Post');
 	}
 
 }
