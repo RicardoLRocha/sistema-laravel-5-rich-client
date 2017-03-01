@@ -30,11 +30,9 @@
              {!! Form::open(['url' => 'users/profile', 'class' => 'form']) !!}
 
                  {!! Form::label('name', Lang::get('messages.name')) !!}
-
                  {!! Form::text('name', Auth::user()->name, ["class" => "form-control"]) !!}<br>
 
                  {!! Form::label('email', Lang::get('messages.email')) !!}
-
     	         {!! Form::text('email', Auth::user()->email, ["class" => "form-control"]) !!}<br>
 
                  {!! Form::submit(Lang::get('messages.update_profile'), ["class" => "btn btn-success btn-block"]) !!}

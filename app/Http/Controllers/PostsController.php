@@ -45,6 +45,7 @@ class PostsController extends Controller{
 		return redirect()->back();
 	}
 
+	// ============================= vistas GET y POST de URL Edit =======================================
 	/*
 	* display form posts for edit, 
 	* If it does not exist, return to the previous view.
@@ -58,13 +59,11 @@ class PostsController extends Controller{
 		return redirect()->back();
 	}
 
-	/**
-	* Editando un Post y regreso back()
+	/** Editando un Post y regreso back()
 	*	creo SESION post_updated, servira para sacar mensaje
 	*	
 		@if ( Session: :has('post_updated'))
 			< div ... alert>{ !! Session::get('post_updated') !! }
-	*
 	*
 	* Inyectamos Requests/PostForm.php (RULES), y las usa implicitamente
 	*/
@@ -74,6 +73,9 @@ class PostsController extends Controller{
 		$post->title = \Request::input('title');
 		$post->content = \Request::input('content');
 		$post->foto = \Request::input('foto');
+
+		/** Obtenemos en linea 
+		Form: :hidden('user_id', $ post->user_id) ! !}  */
 		$post->user_id = \Request::input('user_id');
 		$post->save();
 
@@ -83,11 +85,11 @@ class PostsController extends Controller{
 	}
 
 
+	// ====================================================================
 
-	/**
-	* 
+	/** http://localhost:8080/posts/detail/1
 	*
-	* @return Vista posts/detail.php tendra 2 arrays post y comments
+	* @return Vista posts/detail.php tendra 2 arrays post y comments (si tiene)
 	*/	
 	public function getDetail($id){
 
@@ -101,11 +103,8 @@ class PostsController extends Controller{
 	}
 
 
-	/**
-	* Enviar un comentario a un Post y regreso back()
+	/** Enviar un comentario a un Post y regreso back()
 	*	creo SESION comment_saved
-	*
-	*
 	*/
 	public function postComment(CommentForm $commentForm, $id){
 
@@ -125,6 +124,9 @@ class PostsController extends Controller{
 		return redirect()->back();
 	}
 
+
+	// ====================================================================
+	/** Borrado del Post y sus comentarios por ser cascade en su Batabases/Migration/...Post.php */
 	public function deleteDestroy($id){
 
 		$post = Post::find($id);

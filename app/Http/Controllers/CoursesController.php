@@ -37,7 +37,7 @@ class CoursesController extends Controller
     public function postCreate(CursoForm $cursoForm)
     {
         $curso = new Curso;
-        $curso->curso = \Request::input('curso');
+        $curso->course = \Request::input('curso');
         $curso->save();
         \Session::flash('course_created', \Lang::get("messages.course_created"));
         return redirect()->back();
@@ -56,7 +56,7 @@ class CoursesController extends Controller
     public function postEdit(CursoForm $cursoForm, $id)
     {
         $curso = Curso::find($id);
-        $curso->curso = \Request::input('curso');
+        $curso->course = \Request::input('curso');
         $curso->save();
         \Session::flash('course_updated', \Lang::get("messages.course_updated"));
         return redirect()->back();
@@ -79,7 +79,7 @@ class CoursesController extends Controller
 
         $mis_cursos = DB::select('
         SELECT c.*
-        FROM cursos c
+        FROM courses c
         INNER JOIN curso_user cu
         ON c.id = cu.curso_id
         WHERE cu.user_id = ?

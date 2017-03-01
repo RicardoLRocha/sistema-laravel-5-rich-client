@@ -17,7 +17,8 @@ class ProfileForm extends Request
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * tenemos Validacion field_in_use para que tambien sea unico 
+     * y si lo cambian y existe regrese un error True
      *
      * @return array
      */

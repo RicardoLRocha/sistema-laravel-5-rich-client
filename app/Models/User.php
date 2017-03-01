@@ -32,7 +32,7 @@ class User extends Authenticatable{
     }
 
     //relación muchos a muchos entre usuarios y cursos
-    public function cursos(){
+    public function cursosUser(){
         return $this->belongsToMany("App\Models\Curso");
     }
 

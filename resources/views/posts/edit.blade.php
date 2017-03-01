@@ -27,7 +27,8 @@
 		<div class="form-group">
 
 			{!! Form::open(['url' => array('posts/edit', $post->id), 'class' => 'form']) !!}
-
+				
+				<!-- EL Models/Post.php tiene campo user_id -->
 				{!! Form::hidden('user_id', $post->user_id) !!}
 
 				{!! Form::label('title', Lang::get('messages.title')) !!}

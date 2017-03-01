@@ -20,7 +20,7 @@
 			<!-- ========================================================= 
 			SESION user_deleted, 
 			cuando el usuario se haya borrado, salga mensaje en la misma vista
-	 		========================================================= -->
+			========================================================= -->
 			@if (Session::has('user_deleted'))
 				<div class="alert alert-success"> {!! Session::get('user_deleted') !!} </div>
 			@endif
@@ -53,7 +53,7 @@
 								@if( sizeof($user->cursos) > 0 )
 									
 									@foreach($user->cursos as $curso)
-										{{ $curso->curso }}
+										{{ $curso->course }}
 									@endforeach
 								@else
 									
@@ -65,8 +65,8 @@
 
 									<!-- Es como un < a href > -->
 								  {!! Html::link( url('users/edit', $user->id), 
-								  	\Lang::get('messages.edit'), 
-								  	array('class' => 'btn btn-success btn-xs') ) !!}
+									\Lang::get('messages.edit'), 
+									array('class' => 'btn btn-success btn-xs') ) !!}
 								</td>
 								<td width="60" align="center">
 								  {!! Form::open(array('url' => array('users/destroy', $user->id), 'method' => 'DELETE')) !!}
@@ -81,7 +81,7 @@
 				
 				<!-- ======================== 				
 					Para la paginacion
- 				======================== -->				
+				======================== -->				
 				<?php echo $users->render(); ?>
 
 			@endif

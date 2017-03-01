@@ -18,8 +18,10 @@ class UserController extends Controller{
 	* retrieve and display all users
 	*/
 	public function getAll(){
-		return view("users.list")->with('users', User::with("cursos")->paginate(2)->setPath('all'));
+		return view("users.list")->with('users', User::with("cursosUser")->paginate(2)->setPath('all'));
 	}
+
+
 
 	public function getEdit($id){
 
@@ -44,7 +46,12 @@ class UserController extends Controller{
 	/*
 	* display login form
 	*/
-	public function getLogin(){
+	public function getLogin(Request $request){
+
+		if ( Auth::check() ){
+			return redirect()->back();
+		}
+
 		
 		return view("users.login");
 	}
@@ -78,6 +85,9 @@ class UserController extends Controller{
 	*/
 	public function getRegister(){
 
+		if ( Auth::check() ){
+			return redirect()->back();
+		}
 		return view("users.register");
 	}
 
@@ -114,6 +124,7 @@ class UserController extends Controller{
 		}
 	}
 
+	// ================================================================================
 	/*
 	* muestra la página de perfil del usuario
 	*/
@@ -122,16 +133,23 @@ class UserController extends Controller{
 		return view("users.profile");
 	}
 
+	/** Suponemos ya tienes una sesion activa 
+	y enviamos Session de cambio de perfil "success_profile" 
+	*/
 	public function postProfile(ProfileForm $profileForm){
 
 		$id = Auth::user()->id;
 		$user = User::find($id);
-		$user->email = \Request::input('email');
 		$user->name = \Request::input('name');
+		$user->email = \Request::input('email');
 		$user->save();
+
 		\Session::flash('success_profile', \Lang::get("messages.success_profile"));
 		return redirect()->intended('users/profile');
 	}
+
+
+	// ================================================================================
 
 	public function deleteDestroy($id){
 

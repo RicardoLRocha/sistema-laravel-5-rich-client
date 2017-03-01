@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Curso extends Model{
 
+	protected $table = 'courses';
+
 
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $fillable = [
-		'course'
-	];
-
+	protected $fillable = ['course'];
 
 	//un curso puede pertenecer a muchos usuarios, muchos a muchos con users
 	public function users(){
