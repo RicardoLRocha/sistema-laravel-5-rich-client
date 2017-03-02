@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider{
 	* Revizar: Custom Validation Rules
 	*	Extends de los Requests en function rules(){ ... }
 	*
-	*	Comprobar los post para que no sean iguales
+	*	Comprobar la Regla "field_in_use" para que no sean iguales
 	*
 	* @return True si falla y existe uno igual, False si es unico
 	*/

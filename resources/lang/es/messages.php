@@ -2,8 +2,10 @@
 
 return [
     "welcome"               =>  "Bienvenido al Curso de Laravel 5 :user", //parámetros trans
-   
-   "login"                 =>  "Iniciar sesión",
+
+    "not_autorizate_delete"=>  "No esta autorizado a eliminar",
+    "not_autorizate_updated"=>  "No esta autorizado a modificar",
+    "login"                 =>  "Iniciar sesión",
     "password"              =>  "Contraseña",
     "email"                 =>  "Email",
     "wrong_credentials"     =>  "Los datos de acceso son incorrectos",
@@ -26,6 +28,8 @@ return [
     "edit"                  =>  "Editar",
     "delete"                =>  "Eliminar",
     "detail"                =>  "Detalle",
+    "destroy"                =>  "Eliminar",
+   
     "without_courses"       =>  "Sin cursos",
     "update_profile"        =>  "Actualizar perfil",
     "success_profile"       =>  "Perfil actualizado correctamente",

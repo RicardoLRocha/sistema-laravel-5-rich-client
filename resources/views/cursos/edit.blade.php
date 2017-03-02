@@ -28,9 +28,8 @@
 
     		{!! Form::open(['url' => array('cursos/edit', $curso->id), 'class' => 'form']) !!}
 
-    	        {!! Form::label('curso', Lang::choice('messages.courses', 1)) !!}
-
-    	        {!! Form::text('curso', old('curso') ? old('curso') : $curso->curso, ["class" => "form-control"]) !!}<br>
+    	        {!! Form::label('courses', Lang::choice('messages.courses', 1)) !!}
+    	        {!! Form::text('courses', old('courses') ? old('courses') : $curso->courses, ["class" => "form-control"]) !!}<br>
 
     	        <br />
     	        {!! Form::submit(Lang::get('messages.edit_course'), ["class" => "btn btn-success btn-block"]) !!}

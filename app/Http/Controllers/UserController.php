@@ -151,13 +151,15 @@ class UserController extends Controller{
 
 	// ================================================================================
 
+	/** Borrando usuarios por ID, cualquiera puede borrar a cualquiera estando logeado 
+	si se borra a si mismo manda a login, si borra a otro manda mensaje */
 	public function deleteDestroy($id){
 
 		$user = User::find($id);
 		
 		if($user){
-			$user->delete();
 
+			$user->delete();
 			if( ! Auth::user() ){
 				return redirect('users/login');
 			}

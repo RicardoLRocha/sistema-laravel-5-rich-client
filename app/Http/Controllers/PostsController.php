@@ -12,6 +12,10 @@ use App\Http\Requests\PostForm;
 use App\Http\Requests\CommentForm;
 use Auth;
 
+// para politicas
+use Gate;
+
+
 class PostsController extends Controller{
 
 	public function getAll(){
@@ -53,10 +57,17 @@ class PostsController extends Controller{
 	public function getEdit($id){
 
 		$post = Post::find($id);
-		if($post){
-			return view("posts.edit")->with('post', $post);
+
+		if (Gate::denies('update', $post)) {
+			\Session::flash('not_autorizate_updated', \Lang::get("messages.not_autorizate_updated"));
+		}else{
+			if($post){
+				return view("posts.edit")->with('post', $post);
+			}
 		}
+		
 		return redirect()->back();
+		
 	}
 
 	/** Editando un Post y regreso back()
@@ -130,13 +141,20 @@ class PostsController extends Controller{
 	public function deleteDestroy($id){
 
 		$post = Post::find($id);
+
+		if (Gate::denies('eliminar', $post)) {
+			\Session::flash('not_autorizate_delete', \Lang::get("messages.not_autorizate_delete"));
+		}else{
+
+			//$post = Post::find($id);
 		
-		if($post){
-			$post->delete();
-			\Session::flash('post_deleted', \Lang::get("messages.post_deleted"));
+			if($post){
+				$post->delete();
+				\Session::flash('post_deleted', \Lang::get("messages.post_deleted"));
+			}
 		}
-		
 		return redirect()->back();
+
 	}
 
 

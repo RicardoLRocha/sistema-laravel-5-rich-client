@@ -12,99 +12,114 @@ use App\Http\Requests\CursoForm;
 use DB;
 use Auth;
 
-class CoursesController extends Controller
-{
+class CoursesController extends Controller{
 
-    /*
-    * retrieve and display all cursos with users
-    */
-    public function getAll()
-    {
-        return view("cursos.list")->with('cursos', Curso::with("users")->paginate(2)->setPath('all'));
-    }
+	/*
+	* retrieve and display all cursos with users
+	*/
+	public function getAll(){
+		return view("cursos.list")->with('cursos', Curso::with("users")->paginate(2)->setPath('all'));
+	}
 
-    /*
-    * display form cursos
-    */
-    public function getCreate()
-    {
-        return view("cursos.create");
-    }
+	/*
+	* display form cursos
+	*/
+	public function getCreate(){
+		return view("cursos.create");
+	}
 
-    /*
-    * crea un curso nuevo
-    */
-    public function postCreate(CursoForm $cursoForm)
-    {
-        $curso = new Curso;
-        $curso->course = \Request::input('curso');
-        $curso->save();
-        \Session::flash('course_created', \Lang::get("messages.course_created"));
-        return redirect()->back();
-    }
+	/*
+	* crea un curso nuevo
+	*/
+	public function postCreate(CursoForm $cursoForm){
 
-    public function getEdit($id)
-    {
-        $curso = Curso::find($id);
-        if($curso)
-        {
-            return view("cursos.edit")->with('curso', $curso);
-        }
-        return redirect()->back();
-    }
+		$curso = new Curso;
+		$curso->course = \Request::input('course');
+		$curso->save();
 
-    public function postEdit(CursoForm $cursoForm, $id)
-    {
-        $curso = Curso::find($id);
-        $curso->course = \Request::input('curso');
-        $curso->save();
-        \Session::flash('course_updated', \Lang::get("messages.course_updated"));
-        return redirect()->back();
-    }
+		\Session::flash('course_created', \Lang::get("messages.course_created"));
+		return redirect()->back();
+	}
 
-    public function deleteDestroy($id)
-    {
-        $curso = Curso::find($id);
-        if($curso)
-        {
-            $curso->delete();
-            \Session::flash('course_deleted', \Lang::get("messages.course_deleted"));
-        }
-        return redirect()->back();
-    }
 
-    public function getNotsubscribed()
-    {
-        $cursos = DB::select('SELECT c.* FROM cursos c');
+	public function getEdit($id){
 
-        $mis_cursos = DB::select('
-        SELECT c.*
-        FROM courses c
-        INNER JOIN curso_user cu
-        ON c.id = cu.curso_id
-        WHERE cu.user_id = ?
-        ', [Auth::user()->id]);
+		$curso = Curso::find($id);
+		if($curso)
+		{
+			return view("cursos.edit")->with('curso', $curso);
+		}
+		return redirect()->back();
+	}
 
-        $diff = array_udiff($cursos, $mis_cursos,
-              function ($obj_a, $obj_b)
-              {
-                return $obj_a->id - $obj_b->id;
-              }
-        );
+	public function postEdit(CursoForm $cursoForm, $id){
 
-        return view("cursos.list_unsubscribed")->with('cursos', $diff);
-    }
+		$curso = Curso::find($id);
+		$curso->course = \Request::input('course');
+		$curso->save();
+		\Session::flash('course_updated', \Lang::get("messages.course_updated"));
+		return redirect()->back();
+	}
 
-    public function getSubscribe($id)
-    {
-        $curso = Curso::find($id);
-        if($curso)
-        {
-            $user = User::find(Auth::user()->id);
-            $user->cursos()->save($curso);
-            \Session::flash('course_related', \Lang::get("messages.course_related"));
-            return redirect()->back();
-        }
-    }
+	public function deleteDestroy($id){
+
+		$curso = Curso::find($id);
+		
+		if($curso){
+			$curso->delete();
+			\Session::flash('course_deleted', \Lang::get("messages.course_deleted"));
+		}
+		return redirect()->back();
+	}
+
+	/**
+	*	
+	*	@return array con cursos que no esta suscrito el usuario segun su sesion 
+	*/
+	public function getNotsubscribed(){
+		
+		$cursos = DB::select('SELECT c.* FROM courses c');
+
+		$mis_cursos = DB::select('
+			SELECT c.*
+			FROM courses c
+			INNER JOIN curso_user cu
+			ON c.id = cu.curso_id
+			WHERE cu.user_id = ?', [Auth::user()->id]
+		);
+
+		/** Funcion array_diff — Calcula la diferencia entre arrays asociativos */
+		$diff = array_udiff(
+			$cursos, 
+			$mis_cursos,
+			function ($obj_a, $obj_b){
+				return $obj_a->id - $obj_b->id;
+			}
+		);
+
+		return view("cursos.list_unsubscribed")->with('cursos', $diff);
+	}
+
+	/**
+	* El usuario se suscriba en el curso 
+	* "por elc click en  Html::link(url("cursos/subscribe", $curso->id)"
+	*
+	**/
+	public function getSubscribe($id){
+
+		$curso = Curso::find($id);
+		
+		if($curso){
+			$user = User::find(Auth::user()->id);
+
+			/** ==================================
+			 trae la tabla intermedia
+			================================== */
+			$user->cursosUser()->save($curso);
+
+			\Session::flash('course_related', \Lang::get("messages.course_related"));
+			return redirect()->back();
+		}
+	}
 
 }

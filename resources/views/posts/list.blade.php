@@ -19,6 +19,14 @@
 		@if (Session::has('post_deleted'))
 			<div class="alert alert-success">{!! Session::get('post_deleted') !!}</div>
 		@endif
+		
+		@if (Session::has('not_autorizate_updated'))
+			<div class="alert alert-success">{!! Session::get('not_autorizate_updated') !!}</div>
+		@endif
+		
+		@if (Session::has('not_autorizate_delete'))
+			<div class="alert alert-success">{!! Session::get('not_autorizate_delete') !!}</div>
+		@endif
 
 		<div class="col-md-12">
 
@@ -39,16 +47,24 @@
 								<td width="500">{{ $post->title }}</td>
 								<td width="500">{{ $post->user->name }}</td>
 								<td width="60" align="center">
-								  {!! Html::link(url('posts/detail', $post->id), \Lang::get('messages.detail'), array('class' => 'btn btn-success btn-xs')) !!}
+								  {!! Html::link(url('posts/detail', $post->id), \Lang::get('messages.detail'),
+								  	array('class' => 'btn btn-success btn-xs')) !!}
+								</td>
+								<td width="60" align="center">	
+								@can('update', $post)
+									{!! Html::link(url('posts/edit', $post->id), 
+										\Lang::get('messages.edit'), array('class' => 'btn btn-success btn-xs')) !!}
+								@endcan
 								</td>
 								<td width="60" align="center">
-								  {!! Html::link(url('posts/edit', $post->id), \Lang::get('messages.edit'), array('class' => 'btn btn-success btn-xs')) !!}
-								</td>
-								<td width="60" align="center">
-								  {!! Form::open(array('url' => array('posts/destroy', $post->id), 'method' => 'DELETE')) !!}
+								@can('eliminar', $post)
+									{!! Form::open(array('url' => array('posts/destroy', $post->id), 
+										'method' => 'DELETE')) !!}
 									  <button type="submit" class="btn btn-danger btn-xs">Delete</button>
 								  {!! Form::close() !!}
+								@endcan
 								</td>
+
 							</tr>
 						  @endforeach
 					 </tbody>
