@@ -30,13 +30,12 @@ Route::get('/user_richi_orm', function () {
 
 
 //seteamos el idioma seleccionado por el usuario
-/*
 Route::get("language/{locale}", function($locale){
 
 	Session::set('locale', $locale);
 	return redirect()->back();
 });
-*/
+
 
 /* ===========================================
 	Ejemplo de rutas
