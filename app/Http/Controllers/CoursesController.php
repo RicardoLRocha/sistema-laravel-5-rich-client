@@ -88,7 +88,12 @@ class CoursesController extends Controller{
 			WHERE cu.user_id = ?', [Auth::user()->id]
 		);
 
-		/** Funcion array_diff — Calcula la diferencia entre arrays asociativos */
+		// DEBUG simple
+   		//echo '<script>console.log( JSON.stringify( '.json_encode($cursos).', null, 4)   );</script>';
+   		//echo '<script>console.log( JSON.stringify( '.json_encode($mis_cursos).', null, 4)   );</script>';
+
+
+   		/** Funcion array_diff — Calcula la diferencia entre arrays asociativos */
 		$diff = array_udiff(
 			$cursos, 
 			$mis_cursos,
@@ -97,13 +102,14 @@ class CoursesController extends Controller{
 			}
 		);
 
+
 		return view("cursos.list_unsubscribed")->with('cursos', $diff);
 	}
 
 	/**
-	* El usuario se suscriba en el curso 
-	* "por elc click en  Html::link(url("cursos/subscribe", $curso->id)"
-	*
+	* 	El usuario se suscriba en el curso 
+	* 	"por elc click en  Html::link(url("cursos/subscribe", $curso->id)"
+	*	Regresa a misma vista list_unsubscribed.php para mostrar mensaje con session "course_related" 
 	**/
 	public function getSubscribe($id){
 
@@ -113,7 +119,8 @@ class CoursesController extends Controller{
 			$user = User::find(Auth::user()->id);
 
 			/** ==================================
-			 trae la tabla intermedia
+			 trae la tabla intermedia del 
+			 Model User - function cursosUser
 			================================== */
 			$user->cursosUser()->save($curso);
 

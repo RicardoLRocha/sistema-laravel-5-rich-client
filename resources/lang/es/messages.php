@@ -55,7 +55,9 @@ return [
     "course_created"        =>  "El curso ha sido creado correctamente",
     "course_updated"        =>  "El curso ha sido actualizo correctamente",
     "course_deleted"        =>  "El curso ha sido eliminado correctamente",
-    
+    "course_related"        =>  "El curso ha sido relacionado",
+
+
     "subject"               =>  "Motivo",
     "comment"               =>  "Comentario",
     "add_comment"           =>  "Añadir comentario",
